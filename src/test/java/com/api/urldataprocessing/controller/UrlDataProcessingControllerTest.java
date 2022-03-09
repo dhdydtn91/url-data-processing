@@ -1,7 +1,7 @@
 package com.api.urldataprocessing.controller;
 
 import com.api.urldataprocessing.appliaction.scraping.DataScrapingService;
-import com.api.urldataprocessing.presentation.RequestUrlDataDto;
+import com.api.urldataprocessing.presentation.RequestDataDto;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -34,7 +34,7 @@ class UrlDataProcessingControllerTest {
         String exposureType = "TEXT 전체";
         int outputUnit = 4;
 
-        RequestUrlDataDto data = getRequestUrlDataDto(url, exposureType, outputUnit);
+        RequestDataDto data = getRequestUrlDataDto(url, exposureType, outputUnit);
 
         mockMvc.perform(get("/api/v1/urlDataProcessing")
                         .contentType(MediaType.APPLICATION_JSON)
@@ -49,7 +49,7 @@ class UrlDataProcessingControllerTest {
         String exposureType = "TEXT 전체";
         int outputUnit = 4;
 
-        RequestUrlDataDto data = getRequestUrlDataDto(url, exposureType, outputUnit);
+        RequestDataDto data = getRequestUrlDataDto(url, exposureType, outputUnit);
 
         mockMvc.perform(get("/api/v1/urlDataProcessing")
                         .contentType(MediaType.APPLICATION_JSON)
@@ -57,8 +57,8 @@ class UrlDataProcessingControllerTest {
                 .andExpect(status().isBadRequest());
     }
 
-    private RequestUrlDataDto getRequestUrlDataDto(String url, String exposureType, int outputUnit) {
-        return RequestUrlDataDto.builder()
+    private RequestDataDto getRequestUrlDataDto(String url, String exposureType, int outputUnit) {
+        return RequestDataDto.builder()
                 .url(url)
                 .exposureType(exposureType)
                 .outputUnit(outputUnit)

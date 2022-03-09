@@ -7,7 +7,7 @@ import javax.validation.constraints.NotNull;
 
 @Data
 @Builder
-public class RequestUrlDataDto {
+public class RequestDataDto {
 
     @NotNull
     private String url;
@@ -17,5 +17,5 @@ public class RequestUrlDataDto {
 
     @NotNull
     private int outputUnit;
-    
+
 }

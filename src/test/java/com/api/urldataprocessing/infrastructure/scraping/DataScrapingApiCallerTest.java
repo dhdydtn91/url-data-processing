@@ -1,7 +1,7 @@
 package com.api.urldataprocessing.infrastructure.scraping;
 
 import com.api.urldataprocessing.appliaction.scraping.ScrapingDto;
-import com.api.urldataprocessing.presentation.RequestUrlDataDto;
+import com.api.urldataprocessing.presentation.RequestDataDto;
 import org.junit.jupiter.api.Test;
 import org.springframework.context.annotation.Description;
 
@@ -16,7 +16,7 @@ class DataScrapingApiCallerTest {
     @Description("입력받은 url사이트에서 html을 불러온다.")
     void scrap() {
         //given
-        RequestUrlDataDto dto = createDto("https://www.naver.com", "TEXT 전체", 4);
+        RequestDataDto dto = createDto("https://www.naver.com", "TEXT 전체", 4);
 
         //when
         dataScrapingApiCaller = new HtmlDataScrapingApiCaller();
@@ -33,7 +33,7 @@ class DataScrapingApiCallerTest {
     void wrongUrl() {
 
         //given
-        RequestUrlDataDto dto = createDto("https://www.test.cm", "TEXT 전체", 4);
+        RequestDataDto dto = createDto("https://www.test.cm", "TEXT 전체", 4);
         dataScrapingApiCaller = new HtmlDataScrapingApiCaller();
 
 
@@ -42,9 +42,9 @@ class DataScrapingApiCallerTest {
         }).isInstanceOf(RuntimeException.class); //then
     }
 
-    private RequestUrlDataDto createDto(String url, String exposureType, int outputUnit) {
+    private RequestDataDto createDto(String url, String exposureType, int outputUnit) {
 
-        return RequestUrlDataDto.builder()
+        return RequestDataDto.builder()
                 .url(url)
                 .exposureType(exposureType)
                 .outputUnit(outputUnit)

@@ -1,5 +1,6 @@
 package com.api.urldataprocessing.presentation;
 
+import com.api.urldataprocessing.appliaction.processing.DataProcessingService;
 import com.api.urldataprocessing.appliaction.scraping.DataScrapingService;
 import com.api.urldataprocessing.appliaction.scraping.ScrapingDto;
 import lombok.RequiredArgsConstructor;
@@ -15,12 +16,14 @@ import javax.validation.Valid;
 @RequestMapping("/api/v1/")
 @RequiredArgsConstructor
 public class UrlDataProcessingController {
-    
+
     private final DataScrapingService dataScrapingService;
+
+    private final DataProcessingService dataProcessingService;
 
 
     @GetMapping("/urlDataProcessing")
-    public ResponseEntity urlDataProcessing(@RequestBody @Valid RequestUrlDataDto requestUrlData) {
+    public ResponseEntity urlDataProcessing(@RequestBody @Valid RequestDataDto requestUrlData) {
 
         ScrapingDto scrapingData = dataScrapingService.getScrapingData(requestUrlData);
 

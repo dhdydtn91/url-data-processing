@@ -1,7 +1,7 @@
 package com.api.urldataprocessing.infrastructure.scraping;
 
 import com.api.urldataprocessing.appliaction.scraping.ScrapingDto;
-import com.api.urldataprocessing.presentation.RequestUrlDataDto;
+import com.api.urldataprocessing.presentation.RequestDataDto;
 import lombok.extern.slf4j.Slf4j;
 import org.jsoup.Connection;
 import org.jsoup.Jsoup;
@@ -14,7 +14,7 @@ import java.io.IOException;
 @Component
 public class HtmlDataScrapingApiCaller implements DataScrapingApiCaller {
     @Override
-    public ScrapingDto scrap(RequestUrlDataDto requestUrlDataDto) {
+    public ScrapingDto scrap(RequestDataDto requestUrlDataDto) {
         int statusCode;
         String html = "";
         String message = "";
@@ -33,6 +33,12 @@ public class HtmlDataScrapingApiCaller implements DataScrapingApiCaller {
         } catch (IOException e) {
             throw new RuntimeException("해당 주소의 html을 불러오는데 실패하였습니다.");
         }
-        return new ScrapingDto(statusCode, html, message);
+        return ScrapingDto.builder()
+                .statusCode(statusCode)
+                .html(html)
+                .message(message)
+                .exposureType(requestUrlDataDto.getExposureType())
+                .outputUnit(requestUrlDataDto.getOutputUnit())
+                .build();
     }
 }

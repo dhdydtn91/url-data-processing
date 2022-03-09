@@ -4,7 +4,7 @@ import com.api.urldataprocessing.appliaction.scraping.DataScrapingService;
 import com.api.urldataprocessing.appliaction.scraping.HtmlDataScrapingServiceImpl;
 import com.api.urldataprocessing.appliaction.scraping.ScrapingDto;
 import com.api.urldataprocessing.infrastructure.scraping.DataScrapingApiCaller;
-import com.api.urldataprocessing.presentation.RequestUrlDataDto;
+import com.api.urldataprocessing.presentation.RequestDataDto;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -35,23 +35,34 @@ class HtmlDataScrapingServiceImplTest {
         int statusCode = 200;
         String html = "<HTML>www.naver.com</HTML>";
         String message = "success";
-        ScrapingDto dto = new ScrapingDto(statusCode, html, message);
-        RequestUrlDataDto data = createDto();
+        RequestDataDto requestDataDto = createDto();
+        ScrapingDto scrapingDto = getScrapingDto(statusCode, html, message, requestDataDto);
 
         //when
-        when(dataScrapingService.getScrapingData(data)).thenReturn(dto);
-        ScrapingDto scrapingData = dataScrapingService.getScrapingData(data);
+        when(dataScrapingService.getScrapingData(requestDataDto)).thenReturn(scrapingDto);
+        ScrapingDto scrapingData = dataScrapingService.getScrapingData(requestDataDto);
 
         //then
         assertThat(scrapingData.getStatusCode()).isEqualTo(200);
         assertThat(scrapingData.getHtml().equals("<HTML>www.naver.com</HTML>"));
     }
-    
-    private RequestUrlDataDto createDto() {
+
+    private ScrapingDto getScrapingDto(int statusCode, String html, String message, RequestDataDto data) {
+        ScrapingDto dto = ScrapingDto.builder()
+                .statusCode(statusCode)
+                .html(html)
+                .message(message)
+                .exposureType(data.getExposureType())
+                .outputUnit(data.getOutputUnit())
+                .build();
+        return dto;
+    }
+
+    private RequestDataDto createDto() {
         String url = "https://www.naver.com";
         String exposureType = "TEXT 전체";
         int outputUnit = 4;
-        return RequestUrlDataDto.builder()
+        return RequestDataDto.builder()
                 .url(url)
                 .exposureType(exposureType)
                 .outputUnit(outputUnit)
