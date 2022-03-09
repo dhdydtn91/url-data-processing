@@ -5,11 +5,16 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
+import javax.validation.constraints.NotNull;
+
 @Getter
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
 public class ScrapingDto {
 
-    public String html;
+    private int statusCode;
+    @NotNull
+    private String html;
+    private String message;
 }

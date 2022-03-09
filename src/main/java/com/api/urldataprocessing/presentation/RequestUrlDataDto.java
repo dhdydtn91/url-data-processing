@@ -17,4 +17,5 @@ public class RequestUrlDataDto {
 
     @NotNull
     private int outputUnit;
+    
 }
