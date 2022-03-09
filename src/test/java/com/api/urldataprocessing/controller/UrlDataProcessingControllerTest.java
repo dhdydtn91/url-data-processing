@@ -1,6 +1,6 @@
 package com.api.urldataprocessing.controller;
 
-import com.api.urldataprocessing.controller.dto.RequestUrlData;
+import com.api.urldataprocessing.dto.RequestUrlDataDto;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -28,7 +28,7 @@ class UrlDataProcessingControllerTest {
         String exposureType = "TEXT 전체";
         int outputUnit = 4;
 
-        RequestUrlData data = RequestUrlData.builder()
+        RequestUrlDataDto data = RequestUrlDataDto.builder()
                 .url(url)
                 .exposureType(exposureType)
                 .outputUnit(outputUnit)
