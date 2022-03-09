@@ -6,6 +6,7 @@ import com.api.urldataprocessing.presentation.ResponseDataDto;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
+import static com.api.urldataprocessing.appliaction.scraping.ScrapingDto.builder;
 import static org.assertj.core.api.Assertions.assertThat;
 
 class DataProcessingServiceTest {
@@ -15,6 +16,7 @@ class DataProcessingServiceTest {
     @DisplayName("url로 가져온 HTML 데이터를 가공한다.")
     @Test
     void dataProcessing() {
+        dataProcessingService = new DataProcessingService();
         int statusCode = 200;
         String html = "<HTML>AaBbCD01234</HTML>";
         String message = "success";
@@ -23,16 +25,16 @@ class DataProcessingServiceTest {
 
         ResponseDataDto responseDataDto = dataProcessingService.dataProcessing(scrapingDto);
 
-        assertThat(responseDataDto.getQuotient()).isEqualTo("A0a1B2C3");
-        assertThat(responseDataDto.getRemainder()).isEqualTo("D4");
+        assertThat(responseDataDto.getQuotient()).isEqualTo("A0a1B2b3");
+        assertThat(responseDataDto.getRemainder()).isEqualTo("C4D");
     }
 
     private ScrapingDto getScrapingDto(int statusCode, String html, String message) {
-        ScrapingDto dto = ScrapingDto.builder()
+        ScrapingDto dto = builder()
                 .statusCode(statusCode)
                 .html(html)
                 .message(message)
-                .exposureType("HTML 제외")
+                .exposureType("HTML 태그 제외")
                 .outputUnit(4)
                 .build();
         return dto;
