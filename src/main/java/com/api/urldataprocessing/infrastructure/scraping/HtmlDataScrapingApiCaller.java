@@ -1,7 +1,6 @@
 package com.api.urldataprocessing.infrastructure.scraping;
 
 import com.api.urldataprocessing.appliaction.scraping.ScrapingDto;
-import com.api.urldataprocessing.common.exception.FailedScrapingHtmlException;
 import com.api.urldataprocessing.presentation.RequestUrlDataDto;
 import lombok.extern.slf4j.Slf4j;
 import org.jsoup.Connection;
@@ -32,7 +31,7 @@ public class HtmlDataScrapingApiCaller implements DataScrapingApiCaller {
             html = doc.html();
 
         } catch (IOException e) {
-            throw new FailedScrapingHtmlException(requestUrlDataDto.getUrl() + "해당 주소의 html을 불러오는데 실패하였습니다.");
+            throw new RuntimeException("해당 주소의 html을 불러오는데 실패하였습니다.");
         }
         return new ScrapingDto(statusCode, html, message);
     }

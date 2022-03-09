@@ -18,9 +18,6 @@ import static org.mockito.Mockito.when;
 @ExtendWith({MockitoExtension.class})
 class HtmlDataScrapingServiceImplTest {
 
-    private static final String URL = "https://www.naver.com";
-    private static final String EXPOSURETYPE = "TEXT 전체";
-    private static final int OUTPUTUNIT = 4;
     DataScrapingService dataScrapingService;
 
     @Mock
@@ -35,20 +32,29 @@ class HtmlDataScrapingServiceImplTest {
     @Description("요청받은 url의 사이트 html 데이터를 스크래핑 해온다.")
     void getScrapingData() {
         //given
+        int statusCode = 200;
         String html = "<HTML>www.naver.com</HTML>";
-        ScrapingDto dto = new ScrapingDto(html);
-        RequestUrlDataDto data = RequestUrlDataDto.builder()
-                .url(URL)
-                .exposureType(EXPOSURETYPE)
-                .outputUnit(OUTPUTUNIT)
-                .build();
+        String message = "success";
+        ScrapingDto dto = new ScrapingDto(statusCode, html, message);
+        RequestUrlDataDto data = createDto();
 
         //when
         when(dataScrapingService.getScrapingData(data)).thenReturn(dto);
         ScrapingDto scrapingData = dataScrapingService.getScrapingData(data);
 
         //then
+        assertThat(scrapingData.getStatusCode()).isEqualTo(200);
         assertThat(scrapingData.getHtml().equals("<HTML>www.naver.com</HTML>"));
-
+    }
+    
+    private RequestUrlDataDto createDto() {
+        String url = "https://www.naver.com";
+        String exposureType = "TEXT 전체";
+        int outputUnit = 4;
+        return RequestUrlDataDto.builder()
+                .url(url)
+                .exposureType(exposureType)
+                .outputUnit(outputUnit)
+                .build();
     }
 }

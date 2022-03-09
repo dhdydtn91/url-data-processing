@@ -1,7 +1,6 @@
 package com.api.urldataprocessing.infrastructure.scraping;
 
 import com.api.urldataprocessing.appliaction.scraping.ScrapingDto;
-import com.api.urldataprocessing.common.exception.FailedScrapingHtmlException;
 import com.api.urldataprocessing.presentation.RequestUrlDataDto;
 import org.junit.jupiter.api.Test;
 import org.springframework.context.annotation.Description;
@@ -40,7 +39,7 @@ class DataScrapingApiCallerTest {
 
         assertThatThrownBy(() -> {
             dataScrapingApiCaller.scrap(dto); //when
-        }).isInstanceOf(FailedScrapingHtmlException.class); //then
+        }).isInstanceOf(RuntimeException.class); //then
     }
 
     private RequestUrlDataDto createDto(String url, String exposureType, int outputUnit) {
