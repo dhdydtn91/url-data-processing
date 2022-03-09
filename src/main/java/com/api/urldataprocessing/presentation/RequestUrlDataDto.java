@@ -1,4 +1,4 @@
-package com.api.urldataprocessing.dto;
+package com.api.urldataprocessing.presentation;
 
 import lombok.Builder;
 import lombok.Data;

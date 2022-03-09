@@ -1,10 +1,10 @@
 package com.api.urldataprocessing.service;
 
-import com.api.urldataprocessing.domain.scraping.DataScrapingApiCaller;
-import com.api.urldataprocessing.dto.RequestUrlDataDto;
-import com.api.urldataprocessing.service.scraping.DataScrapingService;
-import com.api.urldataprocessing.service.scraping.HtmlDataScrapingServiceImpl;
-import com.api.urldataprocessing.service.scraping.ScrapingDto;
+import com.api.urldataprocessing.appliaction.scraping.DataScrapingService;
+import com.api.urldataprocessing.appliaction.scraping.HtmlDataScrapingServiceImpl;
+import com.api.urldataprocessing.appliaction.scraping.ScrapingDto;
+import com.api.urldataprocessing.infrastructure.scraping.DataScrapingApiCaller;
+import com.api.urldataprocessing.presentation.RequestUrlDataDto;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;

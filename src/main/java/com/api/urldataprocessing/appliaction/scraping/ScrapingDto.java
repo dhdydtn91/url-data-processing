@@ -1,4 +1,4 @@
-package com.api.urldataprocessing.service.scraping;
+package com.api.urldataprocessing.appliaction.scraping;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;

@@ -1,6 +1,5 @@
-package com.api.urldataprocessing.controller;
+package com.api.urldataprocessing.presentation;
 
-import com.api.urldataprocessing.dto.RequestUrlDataDto;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestBody;

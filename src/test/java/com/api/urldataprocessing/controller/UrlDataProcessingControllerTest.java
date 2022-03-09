@@ -1,6 +1,6 @@
 package com.api.urldataprocessing.controller;
 
-import com.api.urldataprocessing.dto.RequestUrlDataDto;
+import com.api.urldataprocessing.presentation.RequestUrlDataDto;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;

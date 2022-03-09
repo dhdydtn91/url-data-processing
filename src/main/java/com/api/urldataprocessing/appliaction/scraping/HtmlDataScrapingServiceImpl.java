@@ -1,7 +1,7 @@
-package com.api.urldataprocessing.service.scraping;
+package com.api.urldataprocessing.appliaction.scraping;
 
-import com.api.urldataprocessing.domain.scraping.DataScrapingApiCaller;
-import com.api.urldataprocessing.dto.RequestUrlDataDto;
+import com.api.urldataprocessing.infrastructure.scraping.DataScrapingApiCaller;
+import com.api.urldataprocessing.presentation.RequestUrlDataDto;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
