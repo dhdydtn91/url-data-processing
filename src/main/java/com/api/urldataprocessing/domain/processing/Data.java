@@ -4,11 +4,15 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 
 import java.util.Arrays;
+import java.util.LinkedList;
+import java.util.Queue;
 import java.util.stream.Collectors;
 
 @Getter
 @NoArgsConstructor
 public class Data {
+
+    private Output output;
     private English english;
     private Numbers numbers;
 
@@ -43,13 +47,9 @@ public class Data {
         numbers.ascendingSort();
     }
 
-    public void ChangePrintUnit() {
-
+    public void changeOutputUnit(int outputUnit) {
+        Queue<Alphabet> englishQueue = new LinkedList(english.getAlphabetList());
+        Queue<Number> numberQueue = new LinkedList(numbers.getNumberList());
+        this.output = Output.of(englishQueue, numberQueue, outputUnit);
     }
-
-    public String crossPrint() {
-        return null;
-    }
-
-
 }
