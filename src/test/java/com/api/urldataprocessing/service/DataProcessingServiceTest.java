@@ -30,14 +30,13 @@ class DataProcessingServiceTest {
     }
 
     private ScrapingDto getScrapingDto(int statusCode, String html, String message) {
-        ScrapingDto dto = builder()
+        return builder()
                 .statusCode(statusCode)
                 .html(html)
                 .message(message)
                 .exposureType("HTML 태그 제외")
                 .outputUnit(4)
                 .build();
-        return dto;
     }
 
 }
