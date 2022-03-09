@@ -6,11 +6,11 @@ import com.api.urldataprocessing.appliaction.scraping.ScrapingDto;
 import com.api.urldataprocessing.infrastructure.scraping.DataScrapingApiCaller;
 import com.api.urldataprocessing.presentation.RequestDataDto;
 import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
-import org.springframework.context.annotation.Description;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.mockito.Mockito.when;
@@ -28,8 +28,8 @@ class HtmlDataScrapingServiceImplTest {
         dataScrapingService = new HtmlDataScrapingServiceImpl(dataScrapingApiCaller);
     }
 
+    @DisplayName("요청받은 url의 사이트 html 데이터를 스크래핑 해온다.")
     @Test
-    @Description("요청받은 url의 사이트 html 데이터를 스크래핑 해온다.")
     void getScrapingData() {
         //given
         int statusCode = 200;
