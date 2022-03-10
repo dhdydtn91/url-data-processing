@@ -1,6 +1,8 @@
 package com.api.urldataprocessing.infrastructure.scraping;
 
 import com.api.urldataprocessing.appliaction.scraping.ScrapingDto;
+import com.api.urldataprocessing.common.exception.ScrapingFailException;
+import com.api.urldataprocessing.common.response.ErrorCode;
 import com.api.urldataprocessing.presentation.RequestDataDto;
 import lombok.extern.slf4j.Slf4j;
 import org.jsoup.Connection;
@@ -16,8 +18,8 @@ public class HtmlDataScrapingApiCaller implements DataScrapingApiCaller {
     @Override
     public ScrapingDto scrap(RequestDataDto requestUrlDataDto) {
         int statusCode;
-        String html = "";
-        String message = "";
+        String html;
+        String message;
         try {
             Connection.Response response = Jsoup.connect(requestUrlDataDto.getUrl())
                     .method(Connection.Method.GET)
@@ -31,7 +33,7 @@ public class HtmlDataScrapingApiCaller implements DataScrapingApiCaller {
             html = doc.html();
 
         } catch (IOException e) {
-            throw new RuntimeException("해당 주소의 html을 불러오는데 실패하였습니다.");
+            throw new ScrapingFailException(requestUrlDataDto.getUrl(), ErrorCode.FAILED_HTML_SCRAPING);
         }
         return ScrapingDto.builder()
                 .statusCode(statusCode)

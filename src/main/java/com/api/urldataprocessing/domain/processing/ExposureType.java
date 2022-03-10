@@ -1,6 +1,8 @@
 package com.api.urldataprocessing.domain.processing;
 
 import com.api.urldataprocessing.appliaction.scraping.ScrapingDto;
+import com.api.urldataprocessing.common.exception.InvalidValueException;
+import com.api.urldataprocessing.common.response.ErrorCode;
 
 import java.util.Arrays;
 
@@ -17,7 +19,7 @@ public enum ExposureType {
         return Arrays.stream(values())
                 .filter(type -> isSame(type.getType(), exposureType))
                 .findAny()
-                .orElseThrow(() -> new RuntimeException(exposureType + "의 노출유형은 없습니다."));
+                .orElseThrow(() -> new InvalidValueException("ExposureType의 값 " + exposureType + "은", ErrorCode.INVALID_INPUT_VALUE));
     }
 
     public static String getTypeData(ScrapingDto dto) {

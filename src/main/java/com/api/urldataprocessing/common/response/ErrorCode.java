@@ -6,12 +6,17 @@ import lombok.RequiredArgsConstructor;
 @Getter
 @RequiredArgsConstructor
 public enum ErrorCode {
-    COMMON_INVALID_PARAM("요청값이 잘못되었습니다."),
-    SCRAPING_FAILED_HTML_READ("해당 주소의 html을 불러오는데 실패하였습니다.");
+    // Common
+    INVALID_INPUT_VALUE(400, "유효하지 않는 입력값 입니다."),
+    METHOD_NOT_ALLOWED(405, "지원하지 않는 Method 입니다."),
+    INTERNAL_SERVER_ERROR(500, "Internal Server Error"),
+    FAILED_HTML_SCRAPING(200, "url 주소에 대한 HTML 스크래핑이 실패하였습니다.");
 
-    private final String errorMsg;
+    private final String message;
+    private int status;
 
-    public String getErrorMsg(Object... arg) {
-        return String.format(errorMsg, arg);
+    ErrorCode(final int status, final String message) {
+        this.status = status;
+        this.message = message;
     }
 }

@@ -29,6 +29,9 @@ class DataProcessingServiceTest {
         assertThat(responseDataDto.getRemainder()).isEqualTo("C4D");
     }
 
+    //Todo "빈 dto가 들어오면 예외가 발생한다."
+
+
     private ScrapingDto getScrapingDto(int statusCode, String html, String message) {
         return builder()
                 .statusCode(statusCode)

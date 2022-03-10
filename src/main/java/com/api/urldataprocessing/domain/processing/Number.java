@@ -1,5 +1,7 @@
 package com.api.urldataprocessing.domain.processing;
 
+import com.api.urldataprocessing.common.exception.InvalidValueException;
+import com.api.urldataprocessing.common.response.ErrorCode;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
 
@@ -11,7 +13,7 @@ import java.util.Map;
 public class Number implements Comparable<Number> {
 
     private final Integer number;
-    private static Map<Integer, Number> map = new HashMap<>();
+    private static final Map<Integer, Number> map = new HashMap<>();
 
     static {
         for (int i = 0; i < 10; i++) {
@@ -21,7 +23,7 @@ public class Number implements Comparable<Number> {
 
     public static Number of(Integer number) {
         if (0 > number || number > 9) {
-            throw new RuntimeException("숫자의 범위는 0~9까지입니다.");
+            throw new InvalidValueException("Number의 값 " + number + "은", ErrorCode.INVALID_INPUT_VALUE);
         }
         return map.get(number);
     }
