@@ -17,24 +17,26 @@ import java.io.IOException;
 public class HtmlDataScrapingApiCaller implements DataScrapingApiCaller {
     @Override
     public ScrapingDto scrap(RequestDataDto requestUrlDataDto) {
-        int statusCode;
-        String html;
-        String message;
+        ScrapingDto scrapingDto;
         try {
             Connection.Response response = Jsoup.connect(requestUrlDataDto.getUrl())
                     .method(Connection.Method.GET)
                     .userAgent("Mozilla")
                     .timeout(5000)
                     .execute();
-
-            Document doc = response.parse();
-            statusCode = response.statusCode();
-            message = response.statusMessage();
-            html = doc.html();
-
+            scrapingDto = createScrapingDto(response, requestUrlDataDto);
         } catch (IOException e) {
             throw new ScrapingFailException(requestUrlDataDto.getUrl(), ErrorCode.FAILED_HTML_SCRAPING);
         }
+        return scrapingDto;
+    }
+
+    public ScrapingDto createScrapingDto(Connection.Response response, RequestDataDto requestUrlDataDto) throws IOException {
+        Document doc = response.parse();
+        int statusCode = response.statusCode();
+        String message = response.statusMessage();
+        String html = doc.html();
+
         return ScrapingDto.builder()
                 .statusCode(statusCode)
                 .html(html)
