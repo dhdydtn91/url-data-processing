@@ -1,9 +1,9 @@
 package com.api.urldataprocessing.appliaction.processing;
 
 import com.api.urldataprocessing.appliaction.scraping.ScrapingDto;
-import com.api.urldataprocessing.domain.processing.Data;
 import com.api.urldataprocessing.domain.processing.ExposureType;
 import com.api.urldataprocessing.domain.processing.Output;
+import com.api.urldataprocessing.domain.processing.ScrapingData;
 import com.api.urldataprocessing.presentation.ResponseDataDto;
 import org.springframework.stereotype.Service;
 
@@ -11,11 +11,10 @@ import org.springframework.stereotype.Service;
 public class DataProcessingService {
 
     public ResponseDataDto dataProcessing(ScrapingDto dto) {
-        String typeData = ExposureType.getTypeData(dto);
-        Data data = Data.of(typeData);
-        data.ascendingSort();
-        data.changeOutputUnit(dto.getOutputUnit());
-        Output output = data.getOutput();
+        ScrapingData scrapingData = ExposureType.getTypeData(dto);
+        scrapingData.ascendingSort();
+        scrapingData.changeOutputUnit(dto.getOutputUnit());
+        Output output = scrapingData.getOutput();
         return new ResponseDataDto(output);
     }
 }

@@ -12,7 +12,7 @@ class DataTest {
     @Test
     void createData() {
         String html = "<HTML>W@e2eAAsc232 34<HTML>";
-        Data data = Data.of(html);
+        TextAllData data = TextAllData.of(html);
 
         English english = data.getEnglish();
         Numbers numbers = data.getNumbers();
@@ -25,7 +25,7 @@ class DataTest {
     @Test
     void changePrintUnit() {
         String html = "<HTML>W@e2eAAsc232    34<HTML>";
-        Data data = Data.of(html);
+        TextAllData data = TextAllData.of(html);
 
         data.ascendingSort();
         English english = data.getEnglish();
@@ -39,7 +39,7 @@ class DataTest {
     @Test
     void changeOutputUnit() {
         String html = "<HTML>W@e2eAAsc232    34<HTML>";
-        Data data = Data.of(html);
+        TextAllData data = TextAllData.of(html);
 
         data.ascendingSort();
         data.changeOutputUnit(4);

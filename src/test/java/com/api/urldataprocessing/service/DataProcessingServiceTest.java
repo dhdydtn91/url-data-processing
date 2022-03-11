@@ -13,31 +13,46 @@ class DataProcessingServiceTest {
 
     DataProcessingService dataProcessingService;
 
-    @DisplayName("url로 가져온 HTML 데이터를 가공한다.")
+    @DisplayName("url로 가져온 HTML에서 태그를 제외한 데이터를 가공한다.")
     @Test
-    void dataProcessing() {
+    void dataProcessing_HTML_TAG_EXCLUDE() {
         dataProcessingService = new DataProcessingService();
         int statusCode = 200;
         String html = "<HTML>AaBbCD01234</HTML>";
         String message = "success";
+        String exposureType = "TEXT 전체";
 
-        ScrapingDto scrapingDto = getScrapingDto(statusCode, html, message);
+        ScrapingDto scrapingDto = getScrapingDto(statusCode, html, message, exposureType);
+
+        ResponseDataDto responseDataDto = dataProcessingService.dataProcessing(scrapingDto);
+
+        assertThat(responseDataDto.getQuotient()).isEqualTo("A0a1B2b3C4DHHLLM");
+        assertThat(responseDataDto.getRemainder()).isEqualTo("MTT");
+    }
+
+    @DisplayName("url로 가져온 HTML 전체 데이터를 가공한다.")
+    @Test
+    void dataProcessing_TEXT_ALL() {
+        dataProcessingService = new DataProcessingService();
+        int statusCode = 200;
+        String html = "<HTML>AaBbCD01234</HTML>";
+        String message = "success";
+        String exposureType = "HTML 태그 제외";
+
+        ScrapingDto scrapingDto = getScrapingDto(statusCode, html, message, exposureType);
 
         ResponseDataDto responseDataDto = dataProcessingService.dataProcessing(scrapingDto);
 
         assertThat(responseDataDto.getQuotient()).isEqualTo("A0a1B2b3");
         assertThat(responseDataDto.getRemainder()).isEqualTo("C4D");
     }
-
-    //Todo "빈 dto가 들어오면 예외가 발생한다."
-
-
-    private ScrapingDto getScrapingDto(int statusCode, String html, String message) {
+    
+    private ScrapingDto getScrapingDto(int statusCode, String html, String message, String exposureType) {
         return builder()
                 .statusCode(statusCode)
                 .html(html)
                 .message(message)
-                .exposureType("HTML 태그 제외")
+                .exposureType(exposureType)
                 .outputUnit(4)
                 .build();
     }

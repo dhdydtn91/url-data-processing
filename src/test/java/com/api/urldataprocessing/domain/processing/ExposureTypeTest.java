@@ -27,20 +27,21 @@ class ExposureTypeTest {
         assertThat(exposureType).isEqualTo(ExposureType.TEXT_ALL);
     }
 
-    @DisplayName("type이 TEXT 전체일때 TEXT_ALL 리턴된다.")
+    @DisplayName("type이 HTML 태그 제외일때 HtmlTagExcludeData 클래스를 생성한다..")
     @Test
     void getTypeData_HTML_TAG_EXCLUDE() {
         int statusCode = 200;
         String html = "<HTML>AaBbCD01234</HTML>";
         String message = "success";
-        ScrapingDto scrapingDto = getScrapingDto(statusCode, html, message, "HTML 태그 제외");
+        String excludeType = "HTML 태그 제외";
+        ScrapingDto scrapingDto = getScrapingDto(statusCode, html, message, excludeType);
 
-        String data = ExposureType.getTypeData(scrapingDto);
+        ScrapingData typeData = ExposureType.getTypeData(scrapingDto);
 
-        assertThat(data).isEqualTo("AaBbCD01234");
+        assertThat(typeData).isInstanceOf(HtmlTagExcludeData.class);
     }
 
-    @DisplayName("type이 TEXT 전체일때 TEXT_ALL 리턴된다.")
+    @DisplayName("type이 TEXT 전체일때 TextAllData 클래스를 생성한다..")
     @Test
     void getTypeData_TEXT_ALL() {
         int statusCode = 200;
@@ -48,9 +49,9 @@ class ExposureTypeTest {
         String message = "success";
         ScrapingDto scrapingDto = getScrapingDto(statusCode, html, message, "TEXT 전체");
 
-        String data = ExposureType.getTypeData(scrapingDto);
+        ScrapingData typeData = ExposureType.getTypeData(scrapingDto);
 
-        assertThat(data).isEqualTo("<HTML>AaBbCD01234</HTML>");
+        assertThat(typeData).isInstanceOf(TextAllData.class);
     }
 
     @DisplayName("올바르지 않은 type이 들어왔을 시 예외발생")

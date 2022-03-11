@@ -2,6 +2,7 @@ package com.api.urldataprocessing.common.exception;
 
 import com.api.urldataprocessing.common.response.ErrorCode;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 
 /**
  * BusinessException 또는 BusinessException 을 확장한 Exception 은
@@ -11,11 +12,9 @@ import lombok.Getter;
  * 특정 ErrorCode 만 alert 를 포함한 모니터링 대상으로 한다.
  */
 @Getter
+@NoArgsConstructor
 public class BusinessException extends RuntimeException {
     private ErrorCode errorCode;
-
-    public BusinessException() {
-    }
 
     public BusinessException(ErrorCode errorCode) {
         super(errorCode.getMessage());

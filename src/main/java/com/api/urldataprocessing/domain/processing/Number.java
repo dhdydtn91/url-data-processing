@@ -12,11 +12,14 @@ import java.util.Map;
 @EqualsAndHashCode
 public class Number implements Comparable<Number> {
 
-    private final Integer number;
+    private static final int MIN_VALUE = 0;
+    private static final int MAX_VALUE = 9;
     private static final Map<Integer, Number> map = new HashMap<>();
 
+    private final Integer number;
+
     static {
-        for (int i = 0; i < 10; i++) {
+        for (int i = MIN_VALUE; i <= MAX_VALUE; i++) {
             map.put(i, new Number(i));
         }
     }
