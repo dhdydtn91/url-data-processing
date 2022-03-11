@@ -7,4 +7,8 @@ public interface ScrapingData {
     void changeOutputUnit(int outputUnit);
 
     Output getOutput();
+
+    Numbers getNumbers();
+
+    English getEnglish();
 }

@@ -6,13 +6,13 @@ import org.junit.jupiter.api.Test;
 import static org.assertj.core.api.Assertions.assertThat;
 
 
-class DataTest {
+class TextAllDataTest {
 
     @DisplayName("출력은 영어와 숫자로만 이루어진다.")
     @Test
     void createData() {
         String html = "<HTML>W@e2eAAsc232 34<HTML>";
-        TextAllData data = TextAllData.of(html);
+        ScrapingData data = TextAllData.of(html);
 
         English english = data.getEnglish();
         Numbers numbers = data.getNumbers();
@@ -25,7 +25,7 @@ class DataTest {
     @Test
     void changePrintUnit() {
         String html = "<HTML>W@e2eAAsc232    34<HTML>";
-        TextAllData data = TextAllData.of(html);
+        ScrapingData data = TextAllData.of(html);
 
         data.ascendingSort();
         English english = data.getEnglish();
@@ -39,7 +39,7 @@ class DataTest {
     @Test
     void changeOutputUnit() {
         String html = "<HTML>W@e2eAAsc232    34<HTML>";
-        TextAllData data = TextAllData.of(html);
+        ScrapingData data = TextAllData.of(html);
 
         data.ascendingSort();
         data.changeOutputUnit(4);
