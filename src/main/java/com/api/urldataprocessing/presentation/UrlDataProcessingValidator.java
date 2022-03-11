@@ -6,7 +6,7 @@ import org.springframework.stereotype.Component;
 import org.springframework.util.StringUtils;
 
 @Component
-public class UrlDataProcessValidator {
+public class UrlDataProcessingValidator {
 
 
     public void validate(RequestDataDto dto) {
@@ -20,6 +20,10 @@ public class UrlDataProcessValidator {
 
         if (!"HTML 태그 제외".equals(dto.getExposureType()) && !"TEXT 전체".equals(dto.getExposureType())) {
             throw new InvalidValueException("ExposureType은 ", ErrorCode.INVALID_INPUT_VALUE);
+        }
+
+        if (dto.getOutputUnit() < 0) {
+            throw new InvalidValueException("outputUnit은 ", ErrorCode.INVALID_INPUT_VALUE);
         }
     }
 }

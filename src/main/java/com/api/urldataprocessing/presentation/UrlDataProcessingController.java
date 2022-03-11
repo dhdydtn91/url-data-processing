@@ -15,13 +15,13 @@ import org.springframework.web.bind.annotation.RestController;
 @RequestMapping("/api/v1/")
 @RequiredArgsConstructor
 @Slf4j
-public class UrlDataProcessController {
+public class UrlDataProcessingController {
 
     private final DataScrapingService dataScrapingService;
 
     private final DataProcessingService dataProcessingService;
 
-    private final UrlDataProcessValidator urlDataProcessValidator;
+    private final UrlDataProcessingValidator urlDataProcessValidator;
 
 
     @GetMapping("/urlDataProcess")
