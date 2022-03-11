@@ -3,6 +3,9 @@ package com.api.urldataprocessing.presentation;
 import com.api.urldataprocessing.appliaction.processing.DataProcessingService;
 import com.api.urldataprocessing.appliaction.scraping.DataScrapingService;
 import com.api.urldataprocessing.appliaction.scraping.ScrapingDto;
+import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.responses.ApiResponse;
+import io.swagger.v3.oas.annotations.responses.ApiResponses;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.ResponseEntity;
@@ -23,7 +26,12 @@ public class UrlDataProcessingController {
 
     private final UrlDataProcessingValidator urlDataProcessValidator;
 
-
+    @Operation(summary = "test hello", description = "hello api example")
+    @ApiResponses({
+            @ApiResponse(responseCode = "200", description = "OK !!"),
+            @ApiResponse(responseCode = "400", description = "BAD REQUEST !!"),
+            @ApiResponse(responseCode = "500", description = "INTERNAL SERVER ERROR !!")
+    })
     @GetMapping("/urlDataProcess")
     public ResponseEntity urlDataProcess(@RequestParam String url, @RequestParam String exposureType, @RequestParam int outputUnit) {
 
