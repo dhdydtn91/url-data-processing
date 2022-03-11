@@ -29,13 +29,13 @@
 
 ## 빌드 또는 실행 방법
 ### 빌드
-```
+```java
 gradle build
 ```
 
 ### 실행
-```
-gradle build
+```java
+gradle run
 ```
 ### 테스트
 스프링 부트 프로젝트 실행 후 http://localhost:8080/swagger-ui/index.html#/ 접속 후 테스트
