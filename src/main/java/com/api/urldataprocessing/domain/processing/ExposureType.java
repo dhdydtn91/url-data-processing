@@ -28,7 +28,7 @@ public enum ExposureType {
                 .orElseThrow(() -> new InvalidValueException("ExposureType의 값 " + exposureType + "은", ErrorCode.INVALID_INPUT_VALUE));
     }
 
-    public static ScrapingData getTypeData(ScrapingDto dto) {
+    public static ScrapingData makeExposureTypeData(ScrapingDto dto) {
         ExposureType type = getType(dto.getExposureType());
         return type.getScrapingData().apply(dto.getHtml());
     }

@@ -11,7 +11,7 @@ import org.springframework.stereotype.Service;
 public class DataProcessingService {
 
     public ResponseDataDto dataProcessing(ScrapingDto dto) {
-        ScrapingData scrapingData = ExposureType.getTypeData(dto);
+        ScrapingData scrapingData = ExposureType.makeExposureTypeData(dto);
         scrapingData.ascendingSort();
         scrapingData.changeOutputUnit(dto.getOutputUnit());
         Output output = scrapingData.getOutput();

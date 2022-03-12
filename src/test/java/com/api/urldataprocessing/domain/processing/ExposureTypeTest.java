@@ -36,7 +36,7 @@ class ExposureTypeTest {
         String excludeType = "HTML 태그 제외";
         ScrapingDto scrapingDto = getScrapingDto(statusCode, html, message, excludeType);
 
-        ScrapingData typeData = ExposureType.getTypeData(scrapingDto);
+        ScrapingData typeData = ExposureType.makeExposureTypeData(scrapingDto);
 
         assertThat(typeData).isInstanceOf(HtmlTagExcludeData.class);
     }
@@ -49,7 +49,7 @@ class ExposureTypeTest {
         String message = "success";
         ScrapingDto scrapingDto = getScrapingDto(statusCode, html, message, "TEXT 전체");
 
-        ScrapingData typeData = ExposureType.getTypeData(scrapingDto);
+        ScrapingData typeData = ExposureType.makeExposureTypeData(scrapingDto);
 
         assertThat(typeData).isInstanceOf(TextAllData.class);
     }
